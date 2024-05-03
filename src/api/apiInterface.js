@@ -20,3 +20,14 @@ export const getAllCategory = async () => {
       throw error;
     }
   }
+
+export const deleteCategory = async(categoriesId)=>{
+  console.log(categoriesId);
+  try {
+    const  response =await apiService("megma/deletecategories","POST",categoriesId)
+    console.log(response);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
