@@ -3,6 +3,7 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import UserTable from "./UserTable";
 
 const MainPage = () => {
+ 
   return (
     <div className="h-screen w-screen  bg-slate-100 flex">
       <nav className="h-[99.5%] w-[20%] bg-slate-400 flex flex-col items-center gap-4 pt-14">

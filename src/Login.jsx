@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAllCategory } from "./api/apiInterface";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,6 +12,15 @@ const Login = () => {
     // After successful login, navigate to the dashboard
     navigate("/dashboard");
   };
+
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      const getAllLeadsResponse = await getAllCategory();
+      console.log("Get All category -->", getAllLeadsResponse);
+
+    };
+    fetchCategoryData();
+  }, []);
 
   return (
     <div className="h-screen w-screen bg-zinc-800 flex items-center justify-center">
