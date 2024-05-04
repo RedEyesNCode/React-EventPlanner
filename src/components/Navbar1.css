@@ -1,0 +1,443 @@
+/* Navbar1.css */
+
+.header-1 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+
+.logo {
+    margin-bottom: 20px;
+}
+
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background-color:white;
+    color:rgb(72, 70, 70);
+    position: fixed;
+    top: 0;
+    left: 5px;
+    margin-top:120px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    margin-left:-20px;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.toggle-btn {
+    position: absolute;
+    top: 90px;
+    left: 10px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+
+}
+.red-icon {
+    color: red;
+}
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-bottom: 1px solid #555;
+}
+
+.profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.sidebar-content {
+    padding-top: 20px;
+    margin-top: -25px;
+    margin-left:30px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+/* Navbar1.css */
+.vertical-line {
+    width: 2px;
+    background-color: grey;
+    height: 100%; 
+    position: absolute; /* Change from fixed to absolute */
+    top: 120px; /* Adjust top position as needed */
+    left:247px; /* Adjust left position to match sidebar width */
+}
+
+
+ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-family: 'Rosario';
+    font-size: 16px;
+    justify-content: center;
+    text-align: center;
+   
+}
+
+ul li svg {
+    margin-right:30px;
+    
+    
+    /* Add margin between icon and text */
+}
+
+.header-1 {
+    margin-top: 50px;
+}
+
+.top-area {
+    display: flex;
+    /* Use flexbox for the top area */
+    align-items: center;
+    /* Center items vertically */
+    justify-content: center;
+    /* Center items horizontally */
+}
+
+.gap-between-elements {
+    margin-left: 500px;
+    /* Adjust the left margin to create space between elements */
+}
+
+.logo-search-notification-container {
+    display: flex;
+    /* Use flexbox for the container */
+    align-items: center;
+    /* Center items vertically */
+    gap: 10px;
+    /* Adjust the gap between elements */
+}
+
+.logo img {
+    height: 50px;
+    /* Adjust the height of the logo as needed */
+    /* Add any other logo styles */
+}
+
+.search-bar {
+    display: flex;
+    border: 2px solid black;
+    border-radius: 20px 20px;
+    align-items: center;
+}
+
+.search-bar input[type="text"] {
+    width: 200px;
+}
+
+.notification-icons {
+    color: red;
+    font-size: 60px;
+}
+
+.logo-search-container {
+    display: flex;
+    align-items: center;
+}
+
+.heading-contain-4 {
+    display: flex;
+    flex-direction: row;
+}
+
+.heading-contain-3 {
+
+
+    margin-top: -20px;
+}
+
+.search-bar input[type="text"] {
+    padding: 8px;
+    border: none;
+    border-radius: 10px 10px;
+    margin-right: 10px;
+}
+
+.search-bar button {
+    padding: 8px;
+    border-radius: 10px 10px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.notification-icons {
+    display: flex;
+    align-items: center;
+}
+
+.fa-bars,
+.fa-times {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.heading-contain-2 {
+    margin-top: 100px;
+}
+
+.dropbtn {
+    background-color: black;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-left: 400px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-left: 370px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: black;
+}
+
+.heading-contain-1 {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
+
+.heading-contain-1 h1 {
+    font-size: 14px;
+}
+
+.gap {
+    width: 320px;
+}
+
+.gap1 {
+    width: 120px;
+}
+
+/* styles.css */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+}
+
+.headings h1,
+.headings h2 {
+    margin: 0;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.dropbtn i {
+    margin-left: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #007bff;
+}
+
+/* styles.css */
+
+.header4 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+}
+
+.headings {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    margin-left: 400px;
+
+}
+
+.headings h1 {
+    margin: 20px;
+
+}
+
+.gap {
+    margin-left: 400px;
+    /* Adjust as needed */
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+}
+
+.dropbtn i {
+    margin-left: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #007bff;
+}
+
+/* Navbar1.css */
+
+/* Navbar1.css */
+
+/* Other styles remain unchanged */
+
+/* Show rounded buttons on hover */
+
+
+/* Adjust rounded button styles */
+.rounded-button {
+    display: flex;
+    margin-left:10px;
+    background-color: transparent;
+    padding: 10px;
+    margin: 0 10px;
+    font-size: 12px;
+    cursor: pointer;
+    width: 400px;
+    border:  none;
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+/* Change border radius on hover */
+.rounded-button:hover {
+    background: linear-gradient(149deg, rgba(253, 95, 173, 1) 4%, rgba(253, 108, 162, 1) 14%, rgb(230, 154, 192) 100%);
+    color: red;
+    border-radius:30px; /* Adjusted border radius on hover */
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 150px;
+    }
+}
