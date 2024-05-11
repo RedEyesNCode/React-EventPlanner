@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 import UserTable from "./UserTable";
-import EventTable from "./components/EventTable"; // Import the component you want to render for "View Event"
-import CategoryTable from "./components/CategoryTable"; // Import the component you want to render for "View Event"
-import LocationTable from "./components/LocationTable"; // Import the component you want to render for "View Event"
+import EventTable from "./EventTable"; // Import the component you want to render for "View Event"
+import CategoryTable from "./CategoryTable"; // Import the component you want to render for "View Event"
+import LocationTable from "./LocationTable"; // Import the component you want to render for "View Event"
 
 
 const MainPage = () => {

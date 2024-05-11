@@ -14,10 +14,18 @@ export const deleteUser = async (userId) => {
   try {
     // Construct the request body with userId
     const body = { userId };
-    console.log("Body:", body);
     const response = await apiService("megma/deleteuser", "POST", body);
     return response;
   } catch (error) {
     throw error;
   }
 }
+
+export const addUser = async (formData) => {
+  try {
+    const response = await apiService("megma/signup", "POST", formData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
