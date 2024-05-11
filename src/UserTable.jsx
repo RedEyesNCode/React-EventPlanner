@@ -107,8 +107,8 @@ const UserTable = (props) => {
   };
 
   return (
-    <div className=" p-5 h-[550px] overflow-scroll">
-      <div className="Input element flex gap-10 mb-4">
+    <div className=" p-5 h-full">
+      <div className="Input element flex gap-10 mb-4 text-black">
         <input
           className="outline-none px-2 py-1"
           type="text"
