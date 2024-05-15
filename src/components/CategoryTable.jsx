@@ -118,16 +118,16 @@ const CategoryTable = (props) => {
   return (
     <div className=" p-5 h-[550px] overflow-scroll">
       <div className="Input text-black element flex gap-10 mb-4 py-2 justify-between">
-        <div>
+        <div className="flex gap-10">
           <input
-            className="outline-none px-2 py-1"
+            className="outline-none px-3 py-1 rounded-md"
             type="text"
             placeholder="Filter by name"
             value={filterName}
             onChange={handleNameChange}
           />
           <input
-            className="outline-none px-2 py-1 ml-5"
+            className="outline-none px-3 py-1 rounded-md "
             type="text"
             placeholder="Filter by number"
             value={filterNumber}

@@ -29,3 +29,12 @@ export const addUser = async (formData) => {
     throw error;
   }
 };
+
+export const updateUser = async (formData) => {
+  try {
+    const response = await apiService("megma/signup", "POST", formData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

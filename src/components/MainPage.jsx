@@ -4,6 +4,11 @@ import UserTable from "./UserTable";
 import EventTable from "./EventTable"; // Import the component you want to render for "View Event"
 import CategoryTable from "./CategoryTable"; // Import the component you want to render for "View Event"
 import LocationTable from "./LocationTable"; // Import the component you want to render for "View Event"
+import VenueTable from "./VenueTable"; // Import the component you want to render for "View Event"
+import { motion } from "framer-motion"
+import { IoLocationSharp } from "react-icons/io5";
+import { BiSolidCategory } from "react-icons/bi";
+import { FaCalendarAlt } from "react-icons/fa";
 
 
 const MainPage = () => {
@@ -13,7 +18,7 @@ const MainPage = () => {
 
   console.log("isLighttheme", isLighttheme);
   return (
-    <div className={`h-screen w-screen   flex  ${
+    <motion.div initial={{ opacity:0 }}  animate={{ opacity: 1 }} transition={{duration:.5 , ease:"easeOut"}} className={`h-screen w-screen   flex  ${
       isLighttheme ? "bg-white text-[#1E0338]" : "bg-[#1E0338] text-white"
     }`}>
       <nav className="h-[99.5%] w-[17%]  flex flex-col items-center gap-4 pt-14 border-r">
@@ -50,16 +55,20 @@ const MainPage = () => {
             <h1 className="text-white text-xl">View Users</h1>
           </div>
           <div onClick={() => setdivtoberendered(<EventTable  />)} className="transition duration-500  hover:scale-95  cursor-pointer h-32 w-32 bg-gradient-to-br from-pink-600 via-pink-500 to-yellow-500 rounded-xl flex flex-col items-center justify-center gap-2">
-            <FaRegCircleUser className="text-5xl text-white pr-1" />
+            <FaCalendarAlt className="text-5xl text-white pr-1" />
             <h1 className="text-white text-xl">View Event</h1>
           </div>
           <div onClick={() => setdivtoberendered(<CategoryTable  />)} className="transition duration-500 hover:scale-95  cursor-pointer h-32 w-32 bg-gradient-to-br from-pink-600 via-pink-500 to-yellow-500 rounded-xl flex flex-col items-center justify-center gap-2">
-            <FaRegCircleUser className="text-5xl text-white pr-1" />
+            <BiSolidCategory className="text-5xl text-white pr-1" />
             <h1 className="text-white text-xl">Category</h1>
           </div>
           <div onClick={() => setdivtoberendered(<LocationTable  />)} className="transition duration-500 hover:scale-95  cursor-pointer h-32 w-32 bg-gradient-to-br from-pink-600 via-pink-500 to-yellow-500 rounded-xl flex flex-col items-center justify-center gap-2">
-            <FaRegCircleUser className="text-5xl text-white pr-1" />  
+            <IoLocationSharp className="text-5xl text-white pr-1" />  
             <h1 className="text-white text-xl">Location </h1>
+          </div>
+          <div onClick={() => setdivtoberendered(<VenueTable  />)} className="transition duration-500 hover:scale-95  cursor-pointer h-32 w-32 bg-gradient-to-br from-pink-600 via-pink-500 to-yellow-500 rounded-xl flex flex-col items-center justify-center gap-2">
+            <IoLocationSharp className="text-5xl text-white pr-1" />  
+            <h1 className="text-white text-xl">Venue </h1>
           </div>
         </div>
         <div className="h-[559px]">
@@ -67,7 +76,7 @@ const MainPage = () => {
           {divtoberendered}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

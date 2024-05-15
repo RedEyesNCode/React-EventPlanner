@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getallevents, deleteEvent, addEvent } from "../Apis/EventApi";
 import { getAllLocations ,deleteLocation,addLocation} from "../Apis/LocationApi";
+import { ToastContainer, toast } from "react-toastify";
 
 const LocationTable = (props) => {
   const { isLighttheme } = props;
@@ -87,7 +88,7 @@ const LocationTable = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addLocation(formData);
+    await createLocation(formData);
     setFormData({
         venue_name: "",
         address: "",
@@ -96,22 +97,21 @@ const LocationTable = (props) => {
         contact_name: "",
         website: ""
     });
-
+    toast.success("Location added successfully");
     setIsAddDialogOpen(false)
-    window.location.reload();
   };
 
-  const createEvent = async (formData) => {
+  const createLocation = async (formData) => {
     try {
-      const response = await addEvent(formData);
+      const response = await addLocation(formData);
       setLocationData([...LocationData, response.data]);
       sessionStorage.setItem(
         "LocationData",
         JSON.stringify([...LocationData, response.data])
       );
-      console.log("Event added successfully:", response.data);
+      console.log("Location added successfully:", response.data);
     } catch (error) {
-      console.error("Error adding event:", error);
+      console.error("Error adding Location:", error);
     }
   };
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -119,16 +119,16 @@ const LocationTable = (props) => {
   return (
     <div className=" p-5 h-full overflow-scroll">
       <div className="Input text-black element flex gap-10 mb-4 py-2 justify-between">
-        <div>
+        <div className="flex gap-10">
           <input
-            className="outline-none px-2 py-1"
+            className="outline-none px-3 py-1 rounded-md"
             type="text"
             placeholder="Filter by name"
             value={filterName}
             onChange={handleNameChange}
           />
           <input
-            className="outline-none px-2 py-1 ml-5"
+            className="outline-none px-3 py-1 rounded-md "
             type="text"
             placeholder="Filter by Description"
             value={filterNumber}
@@ -282,6 +282,7 @@ const LocationTable = (props) => {
             </form>
           </div>
         )}
+        <ToastContainer />
     </div>
   );
 };
