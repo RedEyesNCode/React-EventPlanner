@@ -7,6 +7,8 @@ import {
 } from "../Apis/apiInterface";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
 const UserTable = (props) => {
   const { isLighttheme } = props;
@@ -52,7 +54,7 @@ const UserTable = (props) => {
       );
       console.log("User added successfully:", response.data);
     } catch (error) {
-      console.error("Error adding event:", error);
+      console.error("Error adding user:", error);
     }
   };
   const handleUpdateUser = async (e) => {
@@ -71,13 +73,7 @@ const UserTable = (props) => {
   const updateUserData = async (formData) => {
     try {
       const response = await updateUser(formData);
-      // setUserData([...UserData, response.data]);
       toast.warning(response.message);
-
-      // sessionStorage.setItem(
-      //   "UserData",
-      //   JSON.stringify([...UserData, response.data])
-      // );
       console.log("User updated successfully:", response);
     } catch (error) {
       console.error("Error in updating user:", error);
@@ -99,11 +95,12 @@ const UserTable = (props) => {
     };
 
     fetchCategoryData();
-  }, []);
+  }, [isAddDialogOpen]);
   const [filterName, setFilterName] = useState("");
   const [filterNumber, setFilterNumber] = useState("");
   const filteredData = UserData && UserData.filter(
     (user) =>
+      user && 
       user.name.toLowerCase().includes(filterName.toLowerCase()) &&
       user.PhoneNumber.includes(filterNumber)
   );
@@ -111,6 +108,24 @@ const UserTable = (props) => {
     setSelectedUser(user);
     setIsDialogOpen(true);
   };
+
+  const confirmDeleteUser = (userId) => {
+    confirmAlert({
+      title: 'Confirm to delete',
+      message: 'Are you sure you want to delete this user?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => handleDeleteUser(userId)
+        },
+        {
+          label: 'No',
+          onClick: () => {}
+        }
+      ]
+    });
+  };
+
   const handleDeleteUser = async (userId) => {
     try {
       const deleteData = async () => {
@@ -123,7 +138,7 @@ const UserTable = (props) => {
             toast.error(deletedUser.message);
           console.log("Updated UserData", filteredData);
           sessionStorage.setItem("userData", JSON.stringify(filteredData));
-          console.log("Sucessfully deleted user -->", deletedUser);
+          console.log("Successfully deleted user -->", deletedUser);
         } catch (error) {
           console.error("Error deleting user data:", error);
         }
@@ -173,7 +188,7 @@ const UserTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {filteredData &&  filteredData.map((user, index) => (
+          {filteredData && filteredData.map((user, index) => (
             <tr key={index} className="border">
               <td className="border text-center">{++index}</td>
               <td className="border text-center">{user.name}</td>
@@ -188,20 +203,11 @@ const UserTable = (props) => {
                   View User
                 </button>
                 <button
-                  onClick={() => handleDeleteUser(user._id)}
+                  onClick={() => confirmDeleteUser(user._id)}
                   className="w-32 px-3 py-2 bg-[#DE300B] text-white rounded-lg flex items-center justify-center"
                 >
                   Delete User
                 </button>
-                {/* <button
-                  onClick={() => {
-                    setFormData(user);
-                    setIsUpdateDialogOpen(true);
-                  }}
-                  className="w-32 px-3 py-2 bg-yellow-400 text-white rounded-lg flex items-center justify-center"
-                >
-                  Update User
-                </button> */}
                 <button
                   onClick={() => {
                     setSelectedUser(user);

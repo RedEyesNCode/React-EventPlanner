@@ -128,7 +128,7 @@ const VenueTable = (props) => {
   }, [formData]);
   const [filterName, setFilterName] = useState("");
   const [filterNumber, setFilterNumber] = useState("");
-  const filteredData = VenueData.filter(
+  const filteredData = VenueData && VenueData.filter(
     (Venue) =>
       (Venue.venue_name || "").toLowerCase().includes(filterName.toLowerCase()) &&
       (Venue.cost || "").includes(filterNumber)
@@ -204,7 +204,7 @@ const VenueTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((venue, index) => (
+          {filteredData && filteredData.map((venue, index) => (
             <tr key={index} className="border">
               <td className="border text-center">{++index}</td>
               <td className="border text-center">{venue.venue_name}</td>

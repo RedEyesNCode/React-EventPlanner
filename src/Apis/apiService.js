@@ -1,6 +1,8 @@
 // apiService.js
 // const BASE_URL = "http://3.111.135.18:4000/";
-const BASE_URL = "http://localhost:4000/";
+// const BASE_URL = "http://localhost:4000/";
+const BASE_URL = "https://www.megmaitindia.in:4000/";
+// https://www.megmaitindia.in:4000/megma/getAllUser
 
 // you can pass endpoint, method and data to this javascript function.
 

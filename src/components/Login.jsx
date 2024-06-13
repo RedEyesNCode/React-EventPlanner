@@ -17,7 +17,7 @@ const Login = () => {
       // Redirect to the dashboard
       navigate("/dashboard");
     } else {
-      setError("Invalid username or password");
+      alert("Invalid username or password");
     }
   };
 
