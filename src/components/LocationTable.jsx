@@ -117,7 +117,7 @@ const LocationTable = (props) => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
   return (
-    <div className=" p-5 h-full overflow-scroll">
+    <div className="p-5 h-[475px] overflow-auto">
       <div className="Input text-black element flex gap-10 mb-4 py-2 justify-between">
         <div className="flex gap-10">
           <input

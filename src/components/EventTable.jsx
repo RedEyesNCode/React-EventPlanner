@@ -27,16 +27,19 @@ const EventTable = (props) => {
   const [filterName, setFilterName] = useState("");
   const [filterCategory, setfilterCategory] = useState("");
   const [filterUserName, setfilterUserName] = useState("");
-  const filteredData = EventData.filter(
-    (event) =>
-      event.event_name.toLowerCase().includes(filterName.toLowerCase()) &&
-      event.category_id.categories_name &&
-      event.category_id.categories_name
-        .toLowerCase()
-        .includes(filterCategory.toLowerCase()) &&
-      event.userId.name &&
-      event.userId.name.toLowerCase().includes(filterUserName.toLowerCase())
-  );
+  const filteredData =
+    EventData &&
+    EventData.filter(
+      (event) =>
+        event.event_name.toLowerCase().includes(filterName.toLowerCase()) &&
+        event.category_id.categories_name &&
+        event.category_id.categories_name
+          .toLowerCase()
+          .includes(filterCategory.toLowerCase()) &&
+          event.userId && 
+        event.userId.name &&
+        event.userId.name.toLowerCase().includes(filterUserName.toLowerCase())
+    );
 
   const handleCloseDialog = () => {
     setIsAddDialogOpen(false);
@@ -117,7 +120,7 @@ const EventTable = (props) => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
   return (
-    <div className=" p-5 h-[550px] overflow-scroll">
+    <div className="p-5 h-[475px] overflow-auto">
       <div className="Input text-black element flex gap-10 mb-4 py-2 justify-between ">
         <div className="flex gap-10">
           <input
@@ -168,10 +171,10 @@ const EventTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {filteredData.reverse().map((event, index) => (
+          {filteredData && filteredData.reverse().map((event, index) => (
             <tr key={index} className="border h-10">
               <td className="border text-center">{++index}</td>
-              <td className="border text-center">{event.userId.name}</td>
+              <td className="border text-center">{event.userId && event.userId.name}</td>
               <td className="border text-center">
                 {event.category_id.categories_name}
               </td>

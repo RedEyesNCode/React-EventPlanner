@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [credentials, setCredentials] = useState({ name: "", password: "" });
+  const [error, setError] = useState("");
 
   const handleLogin = () => {
     // Perform login logic here
+    const { name, password } = credentials;
 
-    // After successful login, navigate to the dashboard
-    navigate("/dashboard");
+    // Check if username and password are correct
+    if (name === "megma_admin" && password === "123") {
+      // Store user credentials in session storage
+      sessionStorage.setItem("loggedIn", "true");
+      // Redirect to the dashboard
+      navigate("/dashboard");
+    } else {
+      setError("Invalid username or password");
+    }
+  };
+
+  const handleChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
   return (
@@ -24,6 +38,8 @@ const Login = () => {
             id="name"
             type="text"
             name="name"
+            value={credentials.name}
+            onChange={handleChange}
           />
           <label className="font-semibold" htmlFor="password">
             ADMIN PASSWORD :
@@ -31,10 +47,13 @@ const Login = () => {
           <input
             className="outline-none px-5 py-2"
             id="password"
-            type="text"
+            type="password"
             name="password"
+            value={credentials.password}
+            onChange={handleChange}
           />
         </form>
+        {error && <p className="text-red-500">{error}</p>}
         <button
           className="px-7 py-2 font-semibold bg-[#1976D2] text-white rounded-lg"
           onClick={handleLogin}

@@ -114,6 +114,7 @@ const VenueTable = (props) => {
         const getAllVenueResponse = await getAllVenue();
         console.log("Get All Venue -->", getAllVenueResponse);
         setVenueData(getAllVenueResponse.data);
+        console.log("For venue data -> " , getAllVenueResponse)
         sessionStorage.setItem(
           "VenueData",
           JSON.stringify(getAllVenueResponse.data)
@@ -129,8 +130,8 @@ const VenueTable = (props) => {
   const [filterNumber, setFilterNumber] = useState("");
   const filteredData = VenueData.filter(
     (Venue) =>
-      Venue.venue_name.toLowerCase().includes(filterName.toLowerCase()) &&
-      Venue.cost.includes(filterNumber)
+      (Venue.venue_name || "").toLowerCase().includes(filterName.toLowerCase()) &&
+      (Venue.cost || "").includes(filterNumber)
   );
   const handleViewUser = (user) => {
     setSelectedVenue(user);
@@ -165,7 +166,7 @@ const VenueTable = (props) => {
     setImages(selectedVenue.images);
   };
   return (
-    <div className=" p-5 h-full overflow-scroll ">
+    <div className="p-5 h-[475px] overflow-auto">
       <div className="Input text-black element flex gap-10 mb-4 py-2 justify-between">
         <div className="flex gap-10">
           <input

@@ -1,5 +1,6 @@
 // apiService.js
-const BASE_URL = "http://13.235.205.112:4000/";
+// const BASE_URL = "http://3.111.135.18:4000/";
+const BASE_URL = "http://localhost:4000/";
 
 // you can pass endpoint, method and data to this javascript function.
 

@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getAllUsers, deleteUser, addUser, updateUser } from "../Apis/apiInterface";
+import {
+  getAllUsers,
+  deleteUser,
+  addUser,
+  updateUser,
+} from "../Apis/apiInterface";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -10,6 +15,7 @@ const UserTable = (props) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false);
+  const [paymentsDialogOpen, setpaymentsDialogOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -49,7 +55,7 @@ const UserTable = (props) => {
       console.error("Error adding event:", error);
     }
   };
-  const handleUpdateUser = async (e) =>{
+  const handleUpdateUser = async (e) => {
     e.preventDefault();
     await updateUserData(formData);
     setFormData({
@@ -96,7 +102,7 @@ const UserTable = (props) => {
   }, []);
   const [filterName, setFilterName] = useState("");
   const [filterNumber, setFilterNumber] = useState("");
-  const filteredData = UserData.filter(
+  const filteredData = UserData && UserData.filter(
     (user) =>
       user.name.toLowerCase().includes(filterName.toLowerCase()) &&
       user.PhoneNumber.includes(filterNumber)
@@ -113,7 +119,8 @@ const UserTable = (props) => {
           const deletedUser = await deleteUser(userId);
           const filteredData = UserData.filter((user) => user._id !== userId);
           setUserData(filteredData);
-          if (deletedUser.status === "Success") toast.error(deletedUser.message);
+          if (deletedUser.status === "Success")
+            toast.error(deletedUser.message);
           console.log("Updated UserData", filteredData);
           sessionStorage.setItem("userData", JSON.stringify(filteredData));
           console.log("Sucessfully deleted user -->", deletedUser);
@@ -129,7 +136,7 @@ const UserTable = (props) => {
   };
 
   return (
-    <div className=" p-5 h-full overflow-scroll">
+    <div className="p-5 h-[475px] overflow-auto">
       <div className="Input text-black element flex gap-10 mb-4 py-2 justify-between">
         <div className="flex gap-10">
           <input
@@ -166,7 +173,7 @@ const UserTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((user, index) => (
+          {filteredData &&  filteredData.map((user, index) => (
             <tr key={index} className="border">
               <td className="border text-center">{++index}</td>
               <td className="border text-center">{user.name}</td>
@@ -180,17 +187,30 @@ const UserTable = (props) => {
                 >
                   View User
                 </button>
-                 <button
+                <button
                   onClick={() => handleDeleteUser(user._id)}
                   className="w-32 px-3 py-2 bg-[#DE300B] text-white rounded-lg flex items-center justify-center"
                 >
                   Delete User
                 </button>
-                <button
-                  onClick={() => {setFormData(user); setIsUpdateDialogOpen(true)}}
+                {/* <button
+                  onClick={() => {
+                    setFormData(user);
+                    setIsUpdateDialogOpen(true);
+                  }}
                   className="w-32 px-3 py-2 bg-yellow-400 text-white rounded-lg flex items-center justify-center"
                 >
                   Update User
+                </button> */}
+                <button
+                  onClick={() => {
+                    setSelectedUser(user);
+                    setpaymentsDialogOpen(true);
+                    console.log(user);
+                  }}
+                  className="w-32 px-2 py-2 bg-green-400 text-white rounded-lg flex items-center justify-center"
+                >
+                  View Payments
                 </button>
               </td>
             </tr>
@@ -211,6 +231,7 @@ const UserTable = (props) => {
             <p>Email : {selectedUser.email}</p>
             <p>Mobile : {selectedUser.PhoneNumber}</p>
             <p>Address : {selectedUser.Address}</p>
+            <p>Subscription Status : {selectedUser.isPaid ? "Active":"Expired"}</p>
             <button
               onClick={() => setIsDialogOpen(false)}
               className="mt-4 px-4 py-2 bg-gradient-to-br from-pink-600 via-pink-500 to-yellow-500 text-white rounded-lg"
@@ -364,6 +385,49 @@ const UserTable = (props) => {
           </form>
         </div>
       )}
+      {paymentsDialogOpen && selectedUser && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center backdrop-filter backdrop-blur-sm">
+          <div
+            className={` p-8 rounded-lg flex flex-col items-left gap-3 text-[20px] ${
+              isLighttheme
+                ? "bg-zinc-100 text-black"
+                : "bg-[#1E0338] text-white"
+            }`}
+          >
+            <h2 className="text-lg font-bold mb-4 text-center">User Details</h2>
+            <p>Name : {selectedUser.name}</p>
+            <p>Email : {selectedUser.email}</p>
+            <p>Mobile : {selectedUser.PhoneNumber}</p>
+            <p>Address : {selectedUser.Address}</p>
+            <p>Subscription Status : {selectedUser.isPaid ? "Active":"Expired"}</p>
+
+            {/* Render subscriptions */}
+            <div>
+              <h3 className="text-lg font-bold mb-2">Subscriptions:</h3>
+              {selectedUser.subscriptions.length === 0 ? (
+                <p>No history found for subscriptions</p>
+              ) : (
+                <ul className="list-disc pl-5">
+                  {selectedUser.subscriptions.map((subscription, index) => (
+                    <li key={index}>
+                      Date: {new Date(subscription.date).toLocaleDateString()},
+                      Amount: {subscription.amount} Rs
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <button
+              onClick={() => setpaymentsDialogOpen(false)}
+              className="mt-4 px-4 py-2 bg-gradient-to-br from-pink-600 via-pink-500 to-yellow-500 text-white rounded-lg"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       <ToastContainer />
     </div>
   );

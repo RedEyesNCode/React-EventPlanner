@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getallevents, deleteEvent, addEvent } from "../Apis/EventApi";
-import {getallcategories} from "../Apis/CategoryApi";
+import { getallcategories } from "../Apis/CategoryApi";
 
 const CategoryTable = (props) => {
   const { isLighttheme } = props;
@@ -27,9 +27,8 @@ const CategoryTable = (props) => {
   const [filterName, setFilterName] = useState("");
   const [filterNumber, setFilterNumber] = useState("");
   const filteredData = CategoryData.filter(
-    (event) =>
-      event.categories_name.toLowerCase().includes(filterName.toLowerCase()) ||
-      event.description.includes(filterNumber)
+    (cat) =>
+      cat.categories_name.toLowerCase().includes(filterName.toLowerCase())
   );
 
   const handleNameChange = (event) => {
@@ -116,7 +115,7 @@ const CategoryTable = (props) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
   return (
-    <div className=" p-5 h-[550px] overflow-scroll">
+    <div className="p-5 h-[475px] overflow-auto">
       <div className="Input text-black element flex gap-10 mb-4 py-2 justify-between">
         <div className="flex gap-10">
           <input
@@ -125,13 +124,6 @@ const CategoryTable = (props) => {
             placeholder="Filter by name"
             value={filterName}
             onChange={handleNameChange}
-          />
-          <input
-            className="outline-none px-3 py-1 rounded-md "
-            type="text"
-            placeholder="Filter by number"
-            value={filterNumber}
-            onChange={handleNumberChange}
           />
         </div>
       </div>
@@ -147,19 +139,21 @@ const CategoryTable = (props) => {
         <tbody>
           {filteredData.map((category, index) => (
             <tr key={index} className="border h-16">
-            <td className="border text-center">{++index}</td>
-            <td className="border text-center">{category.categories_name}</td>
-            <td className="border text-center">{category.description}</td>
-            <td className=" flex justify-center items-center h-16">
-              <button
-                className="w-32 px-3 py-2 bg-[#1976D2] text-white rounded-lg"
-                onClick={() => {setSelectedCategory(category); setIsViewDialogOpen(true)}}
-              >
-                View Category
-              </button>
-            </td>
-          </tr>
-          
+              <td className="border text-center">{++index}</td>
+              <td className="border text-center">{category.categories_name}</td>
+              <td className="border text-center">{category.description}</td>
+              <td className=" flex justify-center items-center h-16">
+                <button
+                  className="w-32 px-3 py-2 bg-[#1976D2] text-white rounded-lg"
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setIsViewDialogOpen(true);
+                  }}
+                >
+                  View Category
+                </button>
+              </td>
+            </tr>
           ))}
         </tbody>
       </table>
@@ -172,8 +166,10 @@ const CategoryTable = (props) => {
                 : "bg-[#1E0338] text-white"
             }`}
           >
-            <h2 className="text-lg font-bold mb-4 text-center">Event Details</h2>
-            <p>Categories_id : {selectedCategory._id}</p>  
+            <h2 className="text-lg font-bold mb-4 text-center">
+              Event Details
+            </h2>
+            <p>Categories_id : {selectedCategory._id}</p>
             <p>Categories_name : {selectedCategory.categories_name}</p>
             <p>Categories_Description : {selectedCategory.description}</p>
             <button
